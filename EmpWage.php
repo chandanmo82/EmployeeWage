@@ -4,10 +4,14 @@ $IS_PARTTIME = 1;
 $IS_FULLTIME = 2;
 $EMP_RATE_PER_HOUR = 20;
 $NUM_OF_WORKING_DAYS = 20;
+$MAX_HRS_IN_MONTH = 100;
 $empHrs = 0;
 $empWage = 0;
+$totalEmpHrs = 0;
+$totalWorkingDays = 0;
 $totalEmpwage = 0;
-for ($day = 0;$day < $NUM_OF_WORKING_DAYS;$day++){
+while ($totalEmpHrs <= $MAX_HRS_IN_MONTH && $totalWorkingDays <$NUM_OF_WORKING_DAYS ){
+    $totalWorkingDays++;
     $check = rand(0,2);
     switch ($check){
         case $IS_PARTTIME :
@@ -19,10 +23,11 @@ for ($day = 0;$day < $NUM_OF_WORKING_DAYS;$day++){
         default :
             $empHrs = 0;         
     }
-    $empWage = $EMP_RATE_PER_HOUR *  $empHrs;
-    $totalEmpwage += $empWage;
-    echo "Employee Wage :". $empWage;
+    $totalEmpHrs += $empHrs;
+    echo "Day : ". $totalWorkingDays ;
+    echo "  Employee Hours : ". $empHrs;
     echo "<br>";
 }
+$totalEmpwage = $totalEmpHrs * $EMP_RATE_PER_HOUR;
 echo "Total Employee Wage :".$totalEmpwage;
 ?>

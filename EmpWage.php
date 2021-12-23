@@ -9,7 +9,6 @@ class EmployeeWage implements InterfaceEmpWage
 {
      const  IS_FULL_TIME = 1;
      const  IS_PART_TIME = 0;
-     public $numOfCompany = 0;
      public $companyEmpWageArray=array();
 
      /**
@@ -17,16 +16,16 @@ class EmployeeWage implements InterfaceEmpWage
       */
      public function addCompanyEmpWage($companyName, $monthWorkingHours, $workingDays, $wagePerHr)
      {
-         $this->companyEmpWageArray[$this->numOfCompany++] = new CompanyDetails($companyName, $monthWorkingHours, $workingDays, $wagePerHr);
+         $this->companyEmpWageArray[$companyName] = new CompanyDetails($companyName, $monthWorkingHours, $workingDays, $wagePerHr);
      }
  
      public function computeEmpWage() 
      {
-         for ($i=0; $i<$this->numOfCompany; $i++)
+         //for each to iterate over the array.
+         foreach ( $this->companyEmpWageArray as $key => $value)
          {
-             $obj=$this->companyEmpWageArray[$i];
-             $wage=self::calcEmployeeWage($obj);
-             echo "\nCompany : ".$obj->companyName." "."Total Emp Wage is : ".$wage;
+             $wage=self::calcEmployeeWage($value);
+             echo "Company Name : ".$key." and respectively "."Total Emp Wage is : ".$wage."\n";
          }
      }
    /**
@@ -75,4 +74,4 @@ $empWageBuilder->addCompanyEmpWage("IBM", 80, 20, 25);
 $empWageBuilder->addCompanyEmpWage("COGNIZANT", 50, 20, 100);
 $empWageBuilder->computeEmpWage();
  
-?>  
+?> 

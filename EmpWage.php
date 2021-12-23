@@ -25,7 +25,7 @@ class EmployeeWage implements InterfaceEmpWage
          foreach ( $this->companyEmpWageArray as $key => $value)
          {
              $wage=self::calcEmployeeWage($value);
-             echo "Company Name : ".$key." and respectively "."Total Emp Wage is : ".$wage."\n";
+             echo "Company : ".$key." "."Total Emp Wage is : ".$wage."\n\n";
          }
      }
    /**
@@ -38,7 +38,7 @@ class EmployeeWage implements InterfaceEmpWage
     $dailyWage = 0;
     $totalWage = 0;
     $totalWorkingHrs = 0;
-
+    $dailyWage = array();
     //calculating employee daily wage per month using switch.
     for ($i=1; $i < $obj -> workingDays ; $i++) 
     { 
@@ -60,9 +60,14 @@ class EmployeeWage implements InterfaceEmpWage
         {
             break;
         }
-        $dailyWage = $obj -> wagePerHr * $empHrs;
-        $totalWage += $dailyWage;
+        $dailyWage[$i] = $obj -> wagePerHr * $empHrs;
+        $totalWage += $dailyWage[$i];
         $totalWorkingHrs += $empHrs;
+    }
+
+    foreach($dailyWage as $key => $value)
+    {
+        echo "Day : ".$key." Wage : ".$value."\n";
     }
     return $totalWage;
   }
@@ -71,7 +76,7 @@ class EmployeeWage implements InterfaceEmpWage
 $empWageBuilder = new EmployeeWage();
 $empWageBuilder->addCompanyEmpWage("JIO", 100, 25, 20);
 $empWageBuilder->addCompanyEmpWage("IBM", 80, 20, 25);
-$empWageBuilder->addCompanyEmpWage("COGNIZANT", 50, 20, 100);
+$empWageBuilder->addCompanyEmpWage("COGNIZANT", 50, 20, 30);
 $empWageBuilder->computeEmpWage();
  
 ?> 

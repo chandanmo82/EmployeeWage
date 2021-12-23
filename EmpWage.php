@@ -49,4 +49,7 @@ class EmployeeWage
 $empWage = new EmployeeWage();
 $empWage -> calcEmployeeWage("Adani","20","20");
 $empWage -> calcEmployeeWage("Tata","30","25");
+$empWage -> calcEmployeeWage("IBM","25","20");
+$empWage -> calcEmployeeWage("Jio","30","30");
+$empWage -> calcEmployeeWage("Lenovo","35","25");
 ?>

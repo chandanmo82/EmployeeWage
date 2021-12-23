@@ -1,33 +1,50 @@
 <?php
-echo "Welcome to Employee Wage Problem <br>";
-$IS_PARTTIME = 1;
-$IS_FULLTIME = 2;
-$EMP_RATE_PER_HOUR = 20;
-$NUM_OF_WORKING_DAYS = 20;
-$MAX_HRS_IN_MONTH = 100;
-$empHrs = 0;
-$empWage = 0;
-$totalEmpHrs = 0;
-$totalWorkingDays = 0;
-$totalEmpwage = 0;
-while ($totalEmpHrs <= $MAX_HRS_IN_MONTH && $totalWorkingDays <$NUM_OF_WORKING_DAYS ){
-    $totalWorkingDays++;
-    $check = rand(0,2);
-    switch ($check){
-        case $IS_PARTTIME :
-            $empHrs = 4;
-            break;
-        case $IS_FULLTIME :
+class EmployeeWage
+{
+   /**
+    *Declaring a static function and checking the Employee
+    *Attendance by using rand() function
+    */
+   public static function calcEmployeeWage()
+   {
+    $IS_FULL_TIME = 1;
+    $IS_PART_TIME = 0;
+    $WAGE_PER_HOUR = 20;
+    $WORKING_DAYS = 20;
+    $empHrs = 0;
+    $dailyWage = 0;
+    $totalWage = 0;
+    $totalWorkingHrs = 0;
+    
+    //calculating employee daily wage per month using switch.
+    for ($i=1; $i < $WORKING_DAYS ; $i++) 
+    { 
+        $random = rand(0,1);
+        switch ($random) 
+        {
+        case $IS_FULL_TIME:
             $empHrs = 8;
             break;
-        default :
-            $empHrs = 0;         
+        case $IS_PART_TIME:
+            $empHrs = 4;
+            break;
+        default:
+            $empHrs = 0;
+        }
+
+        //Calculating wage till this condition.
+        if($totalWorkingHrs >= 100 || $i == 20)
+        {
+            break;
+        }
+        $dailyWage = $WAGE_PER_HOUR * $empHrs;
+        $totalWage += $dailyWage;
+        $totalWorkingHrs += $empHrs;
     }
-    $totalEmpHrs += $empHrs;
-    echo "Day : ". $totalWorkingDays ;
-    echo "  Employee Hours : ". $empHrs;
-    echo "<br>";
+    echo "Total Working Days: ".$i."Total Working Hours:".$totalWorkingHrs." , "."Salary Per Month: ".$totalWage;
+    }
 }
-$totalEmpwage = $totalEmpHrs * $EMP_RATE_PER_HOUR;
-echo "Total Employee Wage :".$totalEmpwage;
+#calling the function by using object.
+$empWage = new EmployeeWage();
+$empWage -> calcEmployeeWage();
 ?>

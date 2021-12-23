@@ -19,13 +19,16 @@ class EmployeeWage implements InterfaceEmpWage
          $this->companyEmpWageArray[$companyName] = new CompanyDetails($companyName, $monthWorkingHours, $workingDays, $wagePerHr);
      }
  
-     public function computeEmpWage() 
+     public function computeEmpWage($userInput) 
      {
          //for each to iterate over the array.
          foreach ( $this->companyEmpWageArray as $key => $value)
          {
-             $wage=self::calcEmployeeWage($value);
-             echo "Company : ".$key." "."Total Emp Wage is : ".$wage."\n\n";
+             if($userInput == $key)
+             {
+                $wage=self::calcEmployeeWage($value);
+                echo "Company : ".$key." "."Total Emp Wage is : ".$wage."\n\n";
+            }
          }
      }
    /**
@@ -74,9 +77,10 @@ class EmployeeWage implements InterfaceEmpWage
 }
 #calling the function by using object.
 $empWageBuilder = new EmployeeWage();
-$empWageBuilder->addCompanyEmpWage("JIO", 100, 25, 20);
+$empWageBuilder->addCompanyEmpWage("JIO", 100, 20, 20);
 $empWageBuilder->addCompanyEmpWage("IBM", 80, 20, 25);
 $empWageBuilder->addCompanyEmpWage("COGNIZANT", 50, 20, 30);
-$empWageBuilder->computeEmpWage();
+$empWageBuilder->computeEmpWage("JIO");
+$empWageBuilder->computeEmpWage("IBM");
  
-?> 
+?>  
